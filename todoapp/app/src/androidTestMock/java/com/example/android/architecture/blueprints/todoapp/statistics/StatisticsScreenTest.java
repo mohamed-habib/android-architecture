@@ -27,6 +27,7 @@ import com.example.android.architecture.blueprints.todoapp.data.FakeTasksRemoteD
 import com.example.android.architecture.blueprints.todoapp.data.Task;
 import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository;
 import com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetailActivity;
+import com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -54,8 +55,8 @@ public class StatisticsScreenTest {
      * blocks of Junit tests.
      */
     @Rule
-    public ActivityTestRule<StatisticsActivity> mStatisticsActivityTestRule =
-            new ActivityTestRule<>(StatisticsActivity.class, true, false);
+    public ActivityTestRule<TasksActivity> mTasksActivityTestRule =
+            new ActivityTestRule<>(TasksActivity.class, true, false);
 
     /**
      * Setup your test fixture with a fake task id. The {@link TaskDetailActivity} is started with
@@ -75,7 +76,8 @@ public class StatisticsScreenTest {
 
         // Lazily start the Activity from the ActivityTestRule
         Intent startIntent = new Intent();
-        mStatisticsActivityTestRule.launchActivity(startIntent);
+        startIntent.putExtra(TasksActivity.CURRENT_SCREEN, TasksActivity.STATISTICS_SCREEN);
+        mTasksActivityTestRule.launchActivity(startIntent);
     }
 
     @Test

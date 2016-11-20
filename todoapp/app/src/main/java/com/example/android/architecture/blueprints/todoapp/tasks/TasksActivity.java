@@ -40,6 +40,9 @@ import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingRe
 public class TasksActivity extends AppCompatActivity {
 
     private static final String CURRENT_FILTERING_KEY = "CURRENT_FILTERING_KEY";
+    public static final String CURRENT_SCREEN = "CURRENT_SCREEN";
+    public static final String STATISTICS_SCREEN = "STATISTICS_SCREEN";
+    public static final String TASKS_SCREEN = "TASKS_SCREEN";
 
     private DrawerLayout mDrawerLayout;
 
@@ -74,7 +77,11 @@ public class TasksActivity extends AppCompatActivity {
             setupDrawerContent(navigationView);
         }
 
-        showTasksFragment(savedInstanceState);
+        String currentScreen = getIntent().getExtras().getString(CURRENT_SCREEN);
+        if (currentScreen == null || TASKS_SCREEN.equals(currentScreen))
+            showTasksFragment(savedInstanceState);
+        else
+            showStatisticsFragment();
     }
 
     private void showTasksFragment(Bundle savedInstanceState) {
